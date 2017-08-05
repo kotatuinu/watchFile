@@ -129,5 +129,26 @@ namespace watchFile
             listView1.Columns.Add("FileName", -2, HorizontalAlignment.Left);
 
         }
+
+        private void listView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == (Keys.Control |  Keys.C)){
+                string line = "";
+                if (listView1.Items.Count > 0)
+                {
+                    foreach (ListViewItem item in listView1.Items)
+                    {
+                        line += string.Format("{0}\t{1}\n", item.SubItems[0].Text, item.SubItems[1].Text);
+                    }
+                }
+                if (line == "")
+                {
+                    Clipboard.Clear();
+                } else {
+                    Clipboard.SetText(line);
+                }
+            }
+
+        }
     }
 }
